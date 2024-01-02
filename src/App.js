@@ -30,7 +30,17 @@ function App() {
   return (
     <div>
       <Navigation account={account} setAccount={setAccount} />
-      <p>Edit App.js to get started.</p>
+      <div className='form'>
+        <form>
+          <input type='text' placeholder='NFT name'></input>
+          <input type='text'placeholder='Describe your NFT'></input>
+          <input type='submit' value="Generate NFT"></input>
+        </form>
+      </div>
+
+      <div className='image'>
+        <img src=''alt="Your NFT"></img>
+      </div>
 
     </div>
   );
