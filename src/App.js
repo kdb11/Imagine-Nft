@@ -7,7 +7,7 @@ import axios from 'axios';
 // Components
 import Spinner from 'react-bootstrap/Spinner';
 import Navigation from './components/Navigation';
-
+import ToggleButton from './components/ToggleButton';
 // ABIs
 import NFT from './abis/NFT.json'
 
@@ -31,15 +31,7 @@ function App() {
     <div>
       <Navigation account={account} setAccount={setAccount} />
       <div className='form'>
-        <form>
-          <input type='text' placeholder='NFT name'></input>
-          <input type='text'placeholder='Describe your NFT'></input>
-          <input type='submit' value="Generate NFT"></input>
-        </form>
-      </div>
-
-      <div className='image'>
-        <img src=''alt="Your NFT"></img>
+        <ToggleButton />
       </div>
 
     </div>
