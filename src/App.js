@@ -34,6 +34,8 @@ function App() {
         <ToggleButton />
       </div>
 
+      <p> View&nbsp; <a target='_blank' rel="noreferrer" href=''>Metadata</a></p>
+
     </div>
   );
 }
