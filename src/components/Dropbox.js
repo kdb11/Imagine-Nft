@@ -23,7 +23,7 @@ const Dropbox = () => {
             <input type='text' placeholder='NFT name'></input>
             {/* <input type='file' onChange={this.fileSelectedHandler}></input>
             <button onClick={this.fileUploadHandler}>Upload</button> */}
-            <input type='submit' value="Generate NFT"></input>
+            <input type='submit' value="Create NFT"></input>
         </form>
 
         <div className='image'>
