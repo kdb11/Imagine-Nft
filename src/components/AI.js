@@ -9,11 +9,15 @@ const AI = () => {
     const [name, setName] = useState("")
     const [descript, setDescript] = useState("")
     const [image, setImage] = useState(null)
+    const [url, setURL] = useState(null)
 
     const submitHandler = async (e) => {
         e.preventDefault()
         console.log("submit", name, descript)
-        createImage()
+        const imageData = createImage()
+        const url = await uploadImage(imageData)
+
+        console.log("url", url)
     }
 
     const createImage = async () => {
@@ -45,7 +49,21 @@ const AI = () => {
         return data
     }
 
+    const uploadImage = async (imageData) => {
+        console.log("image uploading")
+        const nftstorage = new NFTStorage({ token: process.env.REACT_APP_NFT_STORAGE_API_KEY })
 
+        const { ipnft } = await nftstorage.store({
+            image: new File([imageData], "image.jpeg", { type: "image/jpeg" }),
+            name: name,
+            description: descript,
+        })
+
+        const url = `https://ipfs.io/ipfs/${ipnft}/metadata.json`
+        setURL(url)
+
+    return url
+    }
 
   return (
     <div className='form'>
@@ -58,6 +76,8 @@ const AI = () => {
       <div className='image'>
         <img src={image} alt="Your NFT"></img>
       </div>
+
+      <p>{url} </p>
 
     </div>
     
