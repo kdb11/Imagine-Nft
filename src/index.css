@@ -98,7 +98,7 @@ form input[type="text"] {
   font-size: 1.10em;
 }
 
-form input[type="submit"] {
+form input[type="submit"], .inputBtn {
   background-color: var(--clr-blue);
   color: var(--clr-white);
 

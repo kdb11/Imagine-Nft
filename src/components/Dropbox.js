@@ -1,38 +1,53 @@
-
-import React from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import { NFTStorage, File } from 'nft.storage';
 
 const Dropbox = () => {
-/*     state= {
-        selectedFile: null
-    }
+  const [name, setName] = useState("");
+  const [url, setURL] = useState(null);
+  const [image, setImage] = useState(null);
 
-    fileSelectedHandler = (e) => {
-        this.state({
-            selectedFile: e.target.files[0]
-        })
-    }
+  const fileSelectedHandler = (e) => {
+    const selected = e.target.files[0];
+    setImage(URL.createObjectURL(selected));
+  };
 
-    fileUploadHandler = () => {
-        axios.post("")
+  const fileUploadHandler = async () => {
+    if (image) {
+      console.log("image uploading");
+      const nftstorage = new NFTStorage({ token: process.env.REACT_APP_NFT_STORAGE_API_KEY });
+
+      const { ipnft } = await nftstorage.store({
+        image: new File([image], "image.jpeg", { type: "image/jpeg" }),
+        name: name,
+        description: "",
+      });
+
+      const imageUrl = `https://ipfs.io/ipfs/${ipnft}/metadata.json`;
+      setURL(imageUrl);
     }
- */
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    fileUploadHandler();
+  };
+
   return (
     <div className='form'>
-        <form>
-            <input type='text' placeholder='NFT name'></input>
-            {/* <input type='file' onChange={this.fileSelectedHandler}></input>
-            <button onClick={this.fileUploadHandler}>Upload</button> */}
-            <input type='submit' value="Create NFT"></input>
-        </form>
+      <form onSubmit={handleSubmit}>
+        <input type='text' placeholder='NFT name' onChange={(e) => setName(e.target.value)} />
+        <input type='file' onChange={fileSelectedHandler} />
+        <button className='inputBtn' type='submit'>Create NFT</button>
+      </form>
 
-        <div className='image'>
-            <img src='' alt="Your NFT"></img>
-        </div>
+      <div className='image'>
+        {image && <img src={image} alt="Your NFT" />}
+      </div>
 
+      <p>{url}</p>
     </div>
-  )
-  
+  );
 };
 
 export default Dropbox;
