@@ -29,6 +29,8 @@ const AI = () => {
 
         const name = await nft.name()
         console.log("name", name)
+
+
       }
 
       useEffect(() => {
@@ -43,6 +45,9 @@ const AI = () => {
         const url = await uploadImage(imageData)
 
         console.log("url", url)
+
+        await mintImage(url)
+        console.log("successfull mint")
     }
 
     const createImage = async () => {
@@ -89,6 +94,14 @@ const AI = () => {
 
     return url
     }
+
+    const mintImage = async (tokenURI) => {
+    console.log("starting to mint")
+
+    const signer = await provider.getSigner()
+    const transaction = await nft.connect(signer).mint(tokenURI, { value: ethers.utils.parseUnits("1", "ether") })
+    await transaction.wait()
+  }
 
   return (
     <div className='form'>
