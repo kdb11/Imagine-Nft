@@ -1,10 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { NFTStorage, File } from 'nft.storage';
+import { ethers } from 'ethers';
 
 const Dropbox = () => {
   const [name, setName] = useState("");
   const [url, setURL] = useState(null);
   const [image, setImage] = useState(null);
+  const [provider, setProvider] = useState(null)
+
+  const loadBlockchainData = async () => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum)
+    setProvider(provider)
+  }
+
+  useEffect(() => {
+    loadBlockchainData()
+  }, [])
 
   const fileSelectedHandler = (e) => {
     const selected = e.target.files[0];

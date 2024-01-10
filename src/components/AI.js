@@ -1,15 +1,40 @@
 import { useState, useEffect } from 'react';
 import { NFTStorage, File } from 'nft.storage'
 import { Buffer } from 'buffer';
+import { ethers } from 'ethers';
 import axios from 'axios';
+import NFT from '../abis/NFT.json'
+import config from '../config.json';
 
 
 const AI = () => {
 
+    const [provider, setProvider] = useState(null)
+    const [nft, setNFT] = useState(null)
     const [name, setName] = useState("")
     const [descript, setDescript] = useState("")
     const [image, setImage] = useState(null)
     const [url, setURL] = useState(null)
+    
+    
+
+    const loadBlockchainData = async () => {
+        const provider = new ethers.providers.Web3Provider(window.ethereum)
+        setProvider(provider)
+    
+        const network = await provider.getNetwork()
+    
+        const nft = new ethers.Contract(config[network.chainId].nft.address, NFT, provider)
+        setNFT(nft)
+
+        const name = await nft.name()
+        console.log("name", name)
+      }
+
+      useEffect(() => {
+        loadBlockchainData()
+      }, [])
+    
 
     const submitHandler = async (e) => {
         e.preventDefault()
