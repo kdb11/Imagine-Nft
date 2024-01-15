@@ -57,7 +57,7 @@ const Dropbox = () => {
     fileUploadHandler();
     
 
-    await mintImage(url)
+    await mintImage(image)
     console.log("successfull mint")
   };
 
