@@ -112,7 +112,7 @@ const AI = () => {
       </form>
 
       <div className='image'>
-        <img src={image} alt="Your NFT"></img>
+        {image && <img src={image} alt="Your NFT" />}
       </div>
 
       <p>{url} </p>

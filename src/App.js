@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import image from "./img/3.jpg"
+import image from "./img/2.jpg"
 
 import Navigation from './components/Navigation';
 import ToggleButton from './components/ToggleButton';

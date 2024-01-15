@@ -13,9 +13,9 @@
   }
   
   .active-component {
-    background-color: blue;
+    background-color: black;
   }
   
   .inactive-component {
-    background-color: green;
+    background-color: black;
   }
